@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float speedAmount = 9f;
     public float jumpAmount = 7f;
+    public float downAmount = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,5 +59,13 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsAttack" , false);
         }
 
+        //Character FastFall
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            rb.AddForce(Vector3.down * downAmount, ForceMode2D.Impulse);          
+        }
+        
+
+             
     }
 }
