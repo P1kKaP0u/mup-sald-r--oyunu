@@ -10,13 +10,17 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     public Animator animator;
 
-    public float speedAmount = 9f;
-    public float jumpAmount = 7f;
-    public float downAmount = 4f;
+    public float speedAmount = 6f;
+    public float jumpAmount = 6f;
+    public float downAmount = 20f;
+
+    PlayerAttack playerattack;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();
+        playerattack = GetComponent<PlayerAttack>();    
     }
 
     // Update is called once per frame
@@ -50,9 +54,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Character Attack
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Approximately(rb.velocity.y, 0))
         {
-            animator.SetBool("IsAttack" , true); 
+            animator.SetBool("IsAttack" , true);
+            playerattack.DamageEnemy();
+            
         }
         else
         {   
@@ -64,8 +70,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * downAmount, ForceMode2D.Impulse);          
         }
-        
-
              
     }
+
 }
