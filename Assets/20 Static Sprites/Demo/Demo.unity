@@ -384,7 +384,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &429267106
 Animator:
@@ -452,6 +452,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.213059, y: 2.498584}
   m_EdgeRadius: 0
+--- !u!1 &435492964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435492965}
+  m_Layer: 8
+  m_Name: attackPoint-enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &435492965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435492964}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.94, y: -0.67, z: -74.05164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1864880638}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +885,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1280276179
 BoxCollider2D:
@@ -1122,7 +1152,7 @@ Transform:
   - {fileID: 1323267709}
   - {fileID: 1904393212}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1615203793
 GameObject:
@@ -1286,9 +1316,10 @@ GameObject:
   - component: {fileID: 1864880639}
   - component: {fileID: 1864880640}
   - component: {fileID: 1864880642}
+  - component: {fileID: 1864880641}
   m_Layer: 8
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1373,9 +1404,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.33, y: -0.4135, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 435492965}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1864880639
 BoxCollider2D:
@@ -1416,6 +1448,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1864880636}
+--- !u!114 &1864880641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864880635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ea2bf17bd99ac408045cb3c715bfce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacPoint: {fileID: 435492965}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  attackRange: 1
+  hasarverildi: 1
 --- !u!114 &1864880642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,10 +1604,11 @@ GameObject:
   - component: {fileID: 1930649609}
   - component: {fileID: 1930649608}
   - component: {fileID: 1930649607}
-  - component: {fileID: 1930649612}
   - component: {fileID: 1930649611}
   - component: {fileID: 1930649610}
+  - component: {fileID: 1930649612}
   - component: {fileID: 1930649613}
+  - component: {fileID: 1930649614}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1731,3 +1782,16 @@ MonoBehaviour:
     m_Bits: 256
   attackRange: 1
   hasarverildi: 1
+--- !u!114 &1930649614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930649606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed872bbdcc93a34bac0c07d485b4907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1930649607}

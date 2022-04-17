@@ -29,13 +29,10 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-
         
         animator.SetBool("Isheart", true);
-        
         enemyai.followspeed = 0;
-        Destroy(this.gameObject,0.5f);
-      
+        Destroy(this.gameObject,0.5f);   
 
     }
 }

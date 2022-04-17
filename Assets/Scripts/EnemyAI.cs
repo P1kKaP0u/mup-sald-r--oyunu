@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     private Transform target;
     public float followspeed;
 
-
+    EnemyAttack enemyattack;
 
     void Start()
     {
@@ -22,6 +22,8 @@ public class EnemyAI : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         animator = GetComponent<Animator>();
+
+        enemyattack = GetComponent<EnemyAttack>();
     }
 
 
@@ -54,6 +56,7 @@ public class EnemyAI : MonoBehaviour
         oldPosition = transform.position.x;
 
 
+
     }
 
 
@@ -62,13 +65,16 @@ public class EnemyAI : MonoBehaviour
 
         RaycastHit2D hitEnemy = Physics2D.Raycast(transform.position, transform.right, distance);
 
-
+        
         if (hitEnemy.collider != null)
         {
+          
             Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
             animator.SetBool("Attack", true);
-            EnemyFollow();
-           
+            EnemyFollow(followspeed = 3f);
+
+            
+
         }
         else
         {
@@ -80,10 +86,16 @@ public class EnemyAI : MonoBehaviour
         
 
 
-    void EnemyFollow()
+    void EnemyFollow(float followspeed)
     {
+
+
+
         Vector3 targetPosition = new Vector3(target.position.x, gameObject.transform.position.y, target.position.x);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, followspeed * Time.deltaTime);
+
+        enemyattack.DamagePlayer();
+        
     }
 
 }
