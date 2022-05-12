@@ -13,8 +13,10 @@ public class EnemyAI : MonoBehaviour
     public float distance;
     private Transform target;
     public float followspeed;
+    private bool enemyTrigger;
 
     EnemyAttack enemyattack;
+    
 
     void Start()
     {
@@ -24,6 +26,8 @@ public class EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         enemyattack = GetComponent<EnemyAttack>();
+
+          
     }
 
 
@@ -66,21 +70,38 @@ public class EnemyAI : MonoBehaviour
         RaycastHit2D hitEnemy = Physics2D.Raycast(transform.position, transform.right, distance);
 
         
-        if (hitEnemy.collider != null)
+        if (hitEnemy.collider == null )
         {
-          
-            Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
-            animator.SetBool("Attack", true);
-            EnemyFollow(followspeed = 3f);
-
+           
+            Debug.DrawLine(transform.position, transform.position + transform.right * distance, Color.green);
+            animator.SetBool("Attack", false);
             
+            if (enemyTrigger)
+            {
+                EnemyFollow(followspeed = 4f);
+            }
+            else
+            {
+                EnemyMove();
+            }
 
         }
         else
         {
-            Debug.DrawLine(transform.position, transform.position + transform.right * distance, Color.green);
-            animator.SetBool("Attack", false );
-            EnemyMove();
+            enemyTrigger = true;
+
+            Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
+            EnemyFollow(followspeed = 4f);
+
+
+
+            if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 3f)
+            {
+                animator.SetBool("Attack", true);
+
+                enemyattack.DamagePlayer();
+            }
+
         }
     }
         
@@ -94,7 +115,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 targetPosition = new Vector3(target.position.x, gameObject.transform.position.y, target.position.x);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, followspeed * Time.deltaTime);
 
-        enemyattack.DamagePlayer();
+        
         
     }
 
