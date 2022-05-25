@@ -75,37 +75,48 @@ public class EnemyAI : MonoBehaviour
            
             Debug.DrawLine(transform.position, transform.position + transform.right * distance, Color.green);
             animator.SetBool("Attack", false);
-            
+
             if (enemyTrigger)
             {
+                Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
                 EnemyFollow(followspeed = 4f);
+
+                if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 3f)
+                {
+                    EnemyAttack();
+                }
             }
             else
             {
                 EnemyMove();
             }
-
+            
         }
         else
         {
+
             enemyTrigger = true;
 
             Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
             EnemyFollow(followspeed = 4f);
 
-
-
-            if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 3f)
+            if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 2f)
             {
-                animator.SetBool("Attack", true);
-
-                enemyattack.DamagePlayer();
+                EnemyAttack();
             }
 
         }
     }
         
 
+    void EnemyAttack()
+    {
+
+            animator.SetBool("Attack", true);
+
+            enemyattack.DamagePlayer();  
+
+    }
 
     void EnemyFollow(float followspeed)
     {
