@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-
+    Rigidbody2D rb;
     public Animator animator;
     public Vector2 pos1;
     public Vector2 pos2;
@@ -16,17 +16,20 @@ public class EnemyAI : MonoBehaviour
     private bool enemyTrigger;
 
     EnemyAttack enemyattack;
+
     
 
     void Start()
     {
+
+        rb = GetComponent<Rigidbody2D>();
+
         Physics2D.queriesStartInColliders = false;
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         animator = GetComponent<Animator>();
 
         enemyattack = GetComponent<EnemyAttack>();
-
           
     }
 
@@ -79,9 +82,9 @@ public class EnemyAI : MonoBehaviour
             if (enemyTrigger)
             {
                 Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
-                EnemyFollow(followspeed = 4f);
+                EnemyFollow(followspeed);
 
-                if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 3f)
+                if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 2f)
                 {
                     EnemyAttack();
                 }
@@ -98,7 +101,7 @@ public class EnemyAI : MonoBehaviour
             enemyTrigger = true;
 
             Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
-            EnemyFollow(followspeed = 4f);
+            EnemyFollow(followspeed);
 
             if (transform.position.x - GameObject.Find("Player").GetComponent<Transform>().position.x < 2f)
             {
@@ -119,14 +122,11 @@ public class EnemyAI : MonoBehaviour
     }
 
     void EnemyFollow(float followspeed)
-    {
-
-
+    {    
 
         Vector3 targetPosition = new Vector3(target.position.x, gameObject.transform.position.y, target.position.x);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, followspeed * Time.deltaTime);
 
-        
         
     }
 

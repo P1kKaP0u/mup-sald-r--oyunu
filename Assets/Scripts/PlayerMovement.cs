@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     public Animator animator;
 
-    public float speedAmount = 6f;
-    public float jumpAmount = 6f;
-    public float downAmount = 20f;
+    public float speedAmount;
+    public float jumpAmount;
+    public float downAmount;
 
     PlayerAttack playerattack;
 
@@ -33,15 +33,19 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed" , Mathf.Abs(Input.GetAxis("Horizontal")) );
 
         //Character Jump
-        if (Input.GetKeyDown(KeyCode.UpArrow) && Mathf.Approximately(rb.velocity.y, 0))
-        {
-            rb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
-            animator.SetBool("IsJumping", true);
-        }
-        if(animator.GetBool("IsJumping") && Mathf.Approximately(rb.velocity.y, 0))
-        {
-            animator.SetBool("IsJumping", false);
-        }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) && Mathf.Approximately(rb.velocity.y, 0))
+            {
+                rb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
+                animator.SetBool("IsJumping", true);
+
+            }
+            if (animator.GetBool("IsJumping") && Mathf.Approximately(rb.velocity.y, 0))
+            {
+                animator.SetBool("IsJumping", false);
+            }
+
+        
 
         //Character Left-Right Rotation
         if (Input.GetAxisRaw("Horizontal") == -1 )
