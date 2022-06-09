@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
              Debug.Log("Hasar" + enemy.name);
 
             enemy.GetComponent<Enemy>().Damage(hasarverildi);
+            enemy.GetComponent<EnemyAttack>().enabled = false;  
         }
     }
 

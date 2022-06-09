@@ -14,15 +14,11 @@ public class Enemy : MonoBehaviour
         enemyai = GetComponent<EnemyAI>(); 
     }
 
-
     public void Damage(bool hasaralindi)
     {
-        
-
+     
         if (hasaralindi)
         {
-           
-            
             Die();
         }
     }
