@@ -11,8 +11,6 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange = 1f;
     public bool hasarverildi = true;
 
-
-
     public void DamageEnemy()
     {
 

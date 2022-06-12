@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour
 {
 
     public Animator animator;
-
     EnemyAI enemyai;
 
     void Start()
@@ -28,7 +27,8 @@ public class Enemy : MonoBehaviour
         
         animator.SetBool("Isheart", true);
         enemyai.followspeed = 0;
-        Destroy(this.gameObject,0.5f);   
+        Destroy(this.gameObject,0.5f);
+        Skor.scoreValue += 10;
 
     }
 }

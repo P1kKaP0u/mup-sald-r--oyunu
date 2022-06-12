@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     PlayerMovement playermovement;
     public GameObject gameovercancas;
 
+
     void Start()
     {
         playermovement = GetComponent<PlayerMovement>();
@@ -24,7 +25,6 @@ public class Player : MonoBehaviour
 
             Die();
             gameovercancas.SetActive(true);
-            
         } 
     }
 
